@@ -25,6 +25,8 @@ $routes->get('/tentang', 'Dashboard::tentang');
 
 // Routes Akademik Mahasiswa
 $routes->get('/krs', 'Dashboard::krs');
+$routes->post('/krs/simpan', 'Dashboard::simpanKrs');
+$routes->get('/krs-detail/(:segment)/(:segment)', 'Dashboard::krsDetail/$1/$2');
 $routes->get('/khs', 'Dashboard::khs');
 $routes->get('/jadwal', 'Dashboard::jadwal');
 $routes->get('/transkrip', 'Dashboard::transkrip');
