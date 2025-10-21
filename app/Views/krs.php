@@ -18,7 +18,8 @@ $mahasiswa = [
     'angkatan' => '2021',
     'semester_berjalan' => 5,
     'tahun_akademik_aktif' => '2025/2026',
-    'semester_aktif' => 'GANJIL'
+    'semester_aktif' => 'GANJIL',
+    'konsentrasi' => 'PEMPROGRAMAN WEB'
 ];
 
 // Hitung tahun akademik berdasarkan angkatan dan semester
@@ -98,7 +99,7 @@ if ($session->getFlashdata('success')): ?>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label" style="font-weight: 600; color: #374151;">Semester</label>
-                <select name="semester" class="form-select" style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px;" required>
+                <select name="semester" id="semesterSelect" class="form-select" style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px;" required>
                     <option value="">Pilih Semester</option>
                     <option value="GANJIL" <?= $mahasiswa['semester_aktif'] == 'GANJIL' ? 'selected' : '' ?>>GANJIL</option>
                     <option value="GENAP" <?= $mahasiswa['semester_aktif'] == 'GENAP' ? 'selected' : '' ?>>GENAP</option>
@@ -118,56 +119,50 @@ if ($session->getFlashdata('success')): ?>
                 </small>
             </div>
             <div class="col-md-6 mb-3">
+                <label class="form-label" style="font-weight: 600; color: #374151;">Konsentrasi</label>
+                <select name="konsentrasi" class="form-select" style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px;" required>
+                    <option value="">Pilih Konsentrasi</option>
+                    <option value="PEMPROGRAMAN" <?= $mahasiswa['konsentrasi'] == 'PEMPROGRAMAN' ? 'selected' : '' ?>>PEMPROGRAMAN</option>
+                    <option value="PEMPROGRAMAN WEB" <?= $mahasiswa['konsentrasi'] == 'PEMPROGRAMAN WEB' ? 'selected' : '' ?>>PEMPROGRAMAN WEB</option>
+                    <option value="MULTIMEDIA" <?= $mahasiswa['konsentrasi'] == 'MULTIMEDIA' ? 'selected' : '' ?>>MULTIMEDIA</option>
+                    <option value="UMUM" <?= $mahasiswa['konsentrasi'] == 'UMUM' ? 'selected' : '' ?>>UMUM</option>
+                </select>
+                <small class="text-muted">
+                    <i class="bi bi-info-circle"></i> Pilih konsentrasi sesuai minat Anda
+                </small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
                 <label class="form-label" style="font-weight: 600; color: #374151;">Semester Angka</label>
-                <select name="semester_angka" class="form-select" style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px;" required>
+                <select name="semester_angka" id="semesterAngka" class="form-select" style="border: 2px solid #e5e7eb; border-radius: 8px; padding: 12px;" required>
                     <option value="">Pilih Semester</option>
                     <?php for($i = 1; $i <= 8; $i++): ?>
-                    <option value="<?= $i ?>" <?= $i == $mahasiswa['semester_berjalan'] ? 'selected' : '' ?>><?= $i ?></option>
+                    <option value="<?= $i ?>" data-type="<?= $i % 2 == 1 ? 'ganjil' : 'genap' ?>" <?= $i == $mahasiswa['semester_berjalan'] ? 'selected' : '' ?>><?= $i ?></option>
                     <?php endfor; ?>
                 </select>
                 <small class="text-muted">
-                    <i class="bi bi-info-circle"></i> Semester <?= $mahasiswa['semester_berjalan'] ?> dipilih otomatis
+                    <i class="bi bi-info-circle"></i> Semester akan terfilter berdasarkan pilihan semester
                 </small>
             </div>
         </div>
         
-        <!-- Pilihan Mata Kuliah -->
+        <!-- Navigasi ke Pemilihan Mata Kuliah -->
         <div class="mb-4">
-            <h6 style="font-weight: 700; color: #1e3a5f; margin-bottom: 16px;">
-                <i class="bi bi-list-check"></i> Pilih Mata Kuliah
-            </h6>
-            <div class="row">
-                <?php 
-                $mata_kuliah_tersedia = [
-                    ['kode' => 'TI12-5111', 'nama' => 'Data Mining', 'sks' => 4, 'dosen' => 'Anggie Kurniawan, M.Kom'],
-                    ['kode' => 'TI12-5112', 'nama' => 'Sistem Pakar dan Kecerdasan Buatan', 'sks' => 3, 'dosen' => 'Dr. Matias Bagus, M.Kom'],
-                    ['kode' => 'TI12-5113', 'nama' => 'Analisa Sistem', 'sks' => 3, 'dosen' => 'Zainul Hasan, M.Kom'],
-                    ['kode' => 'TI12-5114', 'nama' => 'Pemrograman Web III', 'sks' => 3, 'dosen' => 'Anggietas, M.Kom'],
-                    ['kode' => 'TI12-5115', 'nama' => 'Kecerdasan Bisnis', 'sks' => 3, 'dosen' => 'Sartika S.T., M.T., Ph.D'],
-                    ['kode' => 'UNV-5116', 'nama' => 'Bahasa Inggris V', 'sks' => 2, 'dosen' => 'Farah Dwi Rahmawati, M.Pd'],
-                    ['kode' => 'UNV-5117', 'nama' => 'Etika Profesi', 'sks' => 2, 'dosen' => 'Bambang Hariadi, M.Si'],
-                    ['kode' => 'UNV-5118', 'nama' => 'KKP - Seminar', 'sks' => 2, 'dosen' => '-'],
-                ];
-                
-                foreach($mata_kuliah_tersedia as $mk): 
-                ?>
-                <div class="col-md-6 mb-3">
-                    <div class="form-check" style="background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb;">
-                        <input class="form-check-input mk-checkbox" type="checkbox" name="mata_kuliah[]" value="<?= $mk['kode'] ?>" data-sks="<?= $mk['sks'] ?>" checked>
-                        <label class="form-check-label" style="color: #374151; font-weight: 500;">
-                            <strong><?= $mk['kode'] ?></strong> - <?= $mk['nama'] ?>
-                            <br><small style="color: #6b7280;"><?= $mk['dosen'] ?> | <?= $mk['sks'] ?> SKS</small>
-                        </label>
+            <div class="content-box" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #0369a1;">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h6 style="font-weight: 700; color: #0369a1; margin-bottom: 8px;">
+                            <i class="bi bi-arrow-right-circle"></i> Langkah Selanjutnya
+                        </h6>
+                        <p style="color: #0369a1; margin: 0;">Silakan lanjutkan ke halaman pemilihan mata kuliah untuk memilih mata kuliah yang akan diambil.</p>
                     </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-            
-            <div class="mt-3">
-                <div class="alert alert-info" style="background: #e0f2fe; border: 1px solid #0369a1; color: #0369a1;">
-                    <i class="bi bi-info-circle"></i> 
-                    <strong>Total SKS Dipilih: <span id="totalSKS">24</span></strong> 
-                    (Maksimal: 24 SKS)
+                    <div class="col-md-4 text-end">
+                        <a href="/pilih-mata-kuliah" class="btn" style="background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                            <i class="bi bi-journal-check"></i> Pilih Mata Kuliah
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,55 +175,47 @@ if ($session->getFlashdata('success')): ?>
     </form>
     
     <script>
-        // Hitung total SKS secara real-time
+        // Filter semester angka berdasarkan pilihan semester GANJIL/GENAP
         document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.mk-checkbox');
-            const totalSKSElement = document.getElementById('totalSKS');
-            
-            function updateTotalSKS() {
-                let total = 0;
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        total += parseInt(checkbox.dataset.sks);
-                    }
+            const semesterSelect = document.getElementById('semesterSelect');
+            const semesterAngkaSelect = document.getElementById('semesterAngka');
+            const allOptions = Array.from(semesterAngkaSelect.querySelectorAll('option[data-type]'));
+
+            function filterSemesterAngka() {
+                const selectedSemester = semesterSelect.value;
+
+                // Reset - tampilkan semua option
+                allOptions.forEach(option => {
+                    option.style.display = '';
                 });
-                totalSKSElement.textContent = total;
-                
-                // Ubah warna alert berdasarkan total SKS
-                const alert = totalSKSElement.closest('.alert');
-                if (total > 24) {
-                    alert.className = 'alert alert-danger';
-                    alert.style.background = '#fee2e2';
-                    alert.style.borderColor = '#dc2626';
-                    alert.style.color = '#dc2626';
-                } else if (total < 12) {
-                    alert.className = 'alert alert-warning';
-                    alert.style.background = '#fef3c7';
-                    alert.style.borderColor = '#d97706';
-                    alert.style.color = '#d97706';
-                } else {
-                    alert.className = 'alert alert-info';
-                    alert.style.background = '#e0f2fe';
-                    alert.style.borderColor = '#0369a1';
-                    alert.style.color = '#0369a1';
+
+                // Filter berdasarkan pilihan
+                if (selectedSemester === 'GANJIL') {
+                    allOptions.forEach(option => {
+                        if (option.dataset.type === 'genap') {
+                            option.style.display = 'none';
+                        }
+                    });
+                } else if (selectedSemester === 'GENAP') {
+                    allOptions.forEach(option => {
+                        if (option.dataset.type === 'ganjil') {
+                            option.style.display = 'none';
+                        }
+                    });
+                }
+
+                // Reset pilihan jika option yang dipilih tersembunyi
+                const selectedOption = semesterAngkaSelect.options[semesterAngkaSelect.selectedIndex];
+                if (selectedOption && selectedOption.style.display === 'none') {
+                    semesterAngkaSelect.value = '';
                 }
             }
-            
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateTotalSKS);
-            });
-            
-            // Validasi form sebelum submit
-            document.getElementById('formKRS').addEventListener('submit', function(e) {
-                const total = parseInt(totalSKSElement.textContent);
-                if (total > 24) {
-                    e.preventDefault();
-                    alert('Total SKS tidak boleh lebih dari 24!');
-                } else if (total < 12) {
-                    e.preventDefault();
-                    alert('Total SKS minimal 12!');
-                }
-            });
+
+            // Jalankan filter saat semester berubah
+            semesterSelect.addEventListener('change', filterSemesterAngka);
+
+            // Jalankan filter saat halaman dimuat (jika sudah ada pilihan default)
+            filterSemesterAngka();
         });
     </script>
 </div>
@@ -255,6 +242,7 @@ if ($session->getFlashdata('success')): ?>
                 <th style="padding: 16px; width: 60px; font-weight: 700; color: #374151;" class="text-center">No.</th>
                 <th style="padding: 16px; font-weight: 700; color: #374151;">Tahun Akademik</th>
                 <th style="padding: 16px; font-weight: 700; color: #374151;">Semester</th>
+                <th style="padding: 16px; font-weight: 700; color: #374151; text-align: center;">Konsentrasi</th>
                 <th style="padding: 16px; font-weight: 700; color: #374151; text-align: center;">Jumlah MK</th>
                 <th style="padding: 16px; font-weight: 700; color: #374151; text-align: center;">Status</th>
                 <th style="padding: 16px; font-weight: 700; color: #374151; text-align: center;">Aksi</th>
@@ -268,10 +256,10 @@ if ($session->getFlashdata('success')): ?>
             // Jika belum ada data di session, gunakan data default
             if (empty($riwayat_krs)) {
                 $krsData = [
-                    ['tahun' => '2024/2025', 'semester' => 'GENAP', 'jumlah_mk' => 7, 'status' => 'Disetujui'],
-                    ['tahun' => '2024/2025', 'semester' => 'GANJIL', 'jumlah_mk' => 8, 'status' => 'Disetujui'],
-                    ['tahun' => '2023/2024', 'semester' => 'GENAP', 'jumlah_mk' => 7, 'status' => 'Disetujui'],
-                    ['tahun' => '2023/2024', 'semester' => 'GANJIL', 'jumlah_mk' => 8, 'status' => 'Disetujui'],
+                    ['tahun' => '2024/2025', 'semester' => 'GENAP', 'konsentrasi' => 'MULTIMEDIA', 'jumlah_mk' => 7, 'status' => 'Disetujui'],
+                    ['tahun' => '2024/2025', 'semester' => 'GANJIL', 'konsentrasi' => 'PEMPROGRAMAN WEB', 'jumlah_mk' => 8, 'status' => 'Disetujui'],
+                    ['tahun' => '2023/2024', 'semester' => 'GENAP', 'konsentrasi' => 'PEMPROGRAMAN', 'jumlah_mk' => 7, 'status' => 'Disetujui'],
+                    ['tahun' => '2023/2024', 'semester' => 'GANJIL', 'konsentrasi' => 'UMUM', 'jumlah_mk' => 8, 'status' => 'Disetujui'],
                 ];
             } else {
                 $krsData = $riwayat_krs;
@@ -291,6 +279,25 @@ if ($session->getFlashdata('success')): ?>
                                  color: <?= $krs['semester'] == 'GANJIL' ? '#1e40af' : '#166534' ?>; 
                                  padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;">
                         <?= $krs['semester'] ?>
+                    </span>
+                </td>
+                <td style="padding: 16px; text-align: center;">
+                    <?php 
+                    $konsentrasi = $krs['konsentrasi'] ?? 'UMUM';
+                    $konsentrasiColor = '';
+                    
+                    if ($konsentrasi == 'PEMPROGRAMAN') {
+                        $konsentrasiColor = '#8b5cf6';
+                    } elseif ($konsentrasi == 'PEMPROGRAMAN WEB') {
+                        $konsentrasiColor = '#06b6d4';
+                    } elseif ($konsentrasi == 'MULTIMEDIA') {
+                        $konsentrasiColor = '#10b981';
+                    } else {
+                        $konsentrasiColor = '#f59e0b';
+                    }
+                    ?>
+                    <span style="background: <?= $konsentrasiColor ?>; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;">
+                        <?= $konsentrasi ?>
                     </span>
                 </td>
                 <td style="padding: 16px; text-align: center; font-weight: 600; color: #374151;">

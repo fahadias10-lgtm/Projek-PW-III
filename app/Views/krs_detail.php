@@ -11,24 +11,34 @@ $mahasiswa = [
     'angkatan' => '2021',
     'semester_berjalan' => 5,
     'tahun_akademik' => '2025/2026',
-    'semester' => 'GANJIL'
+    'semester' => 'GANJIL',
+    'konsentrasi' => 'PEMPROGRAMAN WEB'
 ];
 
 // Data mata kuliah untuk semester yang dipilih
 $matakuliah = [
-    ['kode' => 'TI12-5111', 'nama' => 'DATA MINING', 'dosen' => 'Anggie Kurniawan, M.Kom', 'sks' => 4, 't' => 3, 'p' => 1, 'nilai' => 'A-', 'bobot' => 15.00],
-    ['kode' => 'TI12-5112', 'nama' => 'SISTEM PAKAR DAN KECERDASAN BUATAN', 'dosen' => 'Dr. Matias Bagus, M.Kom', 'sks' => 3, 't' => 2, 'p' => 1, 'nilai' => 'A', 'bobot' => 12.00],
-    ['kode' => 'TI12-5113', 'nama' => 'ANALISA SISTEM', 'dosen' => 'Zainul Hasan, M.Kom', 'sks' => 3, 't' => 2, 'p' => 1, 'nilai' => 'B+', 'bobot' => 10.50],
-    ['kode' => 'TI12-5114', 'nama' => 'PEMROGRAMAN WEB III', 'dosen' => 'Anggietas, M.Kom', 'sks' => 3, 't' => 2, 'p' => 1, 'nilai' => 'A', 'bobot' => 12.00],
-    ['kode' => 'TI12-5115', 'nama' => 'KECERDASAN BISNIS', 'dosen' => 'Sartika S.T., M.T., Ph.D', 'sks' => 3, 't' => 2, 'p' => 1, 'nilai' => 'B+', 'bobot' => 10.50],
-    ['kode' => 'UNV-5116', 'nama' => 'BAHASA INGGRIS V', 'dosen' => 'Farah Dwi Rahmawati, M.Pd', 'sks' => 2, 't' => 2, 'p' => 0, 'nilai' => 'A', 'bobot' => 8.00],
-    ['kode' => 'UNV-5117', 'nama' => 'ETIKA PROFESI', 'dosen' => 'Bambang Hariadi, M.Si', 'sks' => 2, 't' => 2, 'p' => 0, 'nilai' => 'A-', 'bobot' => 7.40],
-    ['kode' => 'UNV-5118', 'nama' => 'KKP - SEMINAR', 'dosen' => '-', 'sks' => 2, 't' => 0, 'p' => 2, 'nilai' => 'A', 'bobot' => 8.00]
+    ['kode' => 'TI12-5111', 'nama' => 'DATA MINING', 'dosen' => 'Anggie Kurniawan, M.Kom', 'sks' => 4, 'hari' => 'Senin', 'jam' => '08:00-10:30', 'ruangan' => 'Lab. Komputer A1', 'konsentrasi' => 'PEMPROGRAMAN'],
+    ['kode' => 'TI12-5112', 'nama' => 'SISTEM PAKAR DAN KECERDASAN BUATAN', 'dosen' => 'Dr. Matias Bagus, M.Kom', 'sks' => 3, 'hari' => 'Selasa', 'jam' => '10:30-12:10', 'ruangan' => 'Ruang Kuliah 201', 'konsentrasi' => 'MULTIMEDIA'],
+    ['kode' => 'TI12-5113', 'nama' => 'ANALISA SISTEM', 'dosen' => 'Zainul Hasan, M.Kom', 'sks' => 3, 'hari' => 'Rabu', 'jam' => '13:00-15:30', 'ruangan' => 'Ruang Kuliah 203', 'konsentrasi' => 'PEMPROGRAMAN WEB'],
+    ['kode' => 'TI12-5114', 'nama' => 'PEMROGRAMAN WEB III', 'dosen' => 'Anggietas, M.Kom', 'sks' => 3, 'hari' => 'Kamis', 'jam' => '15:30-17:10', 'ruangan' => 'Lab. Komputer B2', 'konsentrasi' => 'PEMPROGRAMAN WEB'],
+    ['kode' => 'TI12-5115', 'nama' => 'KECERDASAN BISNIS', 'dosen' => 'Sartika S.T., M.T., Ph.D', 'sks' => 3, 'hari' => 'Jumat', 'jam' => '09:00-11:30', 'ruangan' => 'Ruang Kuliah 205', 'konsentrasi' => 'MULTIMEDIA'],
+    ['kode' => 'UNV-5116', 'nama' => 'BAHASA INGGRIS V', 'dosen' => 'Farah Dwi Rahmawati, M.Pd', 'sks' => 2, 'hari' => 'Senin', 'jam' => '13:00-14:40', 'ruangan' => 'Ruang Kuliah 101', 'konsentrasi' => 'UMUM'],
+    ['kode' => 'UNV-5117', 'nama' => 'ETIKA PROFESI', 'dosen' => 'Bambang Hariadi, M.Si', 'sks' => 2, 'hari' => 'Selasa', 'jam' => '14:00-15:40', 'ruangan' => 'Ruang Kuliah 102', 'konsentrasi' => 'UMUM'],
+    ['kode' => 'UNV-5118', 'nama' => 'KKP - SEMINAR', 'dosen' => '-', 'sks' => 2, 'hari' => 'Rabu', 'jam' => '10:00-11:40', 'ruangan' => 'Auditorium', 'konsentrasi' => 'PEMPROGRAMAN']
 ];
 
-$total_sks = array_sum(array_column($matakuliah, 'sks'));
-$total_bobot = array_sum(array_column($matakuliah, 'bobot'));
-$ips = $total_bobot / $total_sks;
+$total_sks = 4 + 3 + 3 + 3 + 3 + 2 + 2 + 2; // Total: 22 SKS
+
+// Fungsi untuk memberikan warna berdasarkan konsentrasi
+function getKonsentrasiColor($konsentrasi) {
+    $colors = [
+        'PEMPROGRAMAN' => '#8b5cf6',     // Purple
+        'PEMPROGRAMAN WEB' => '#06b6d4', // Cyan
+        'MULTIMEDIA' => '#10b981',       // Emerald
+        'UMUM' => '#f59e0b'              // Amber
+    ];
+    return $colors[$konsentrasi] ?? '#6b7280';
+}
 ?>
 
 <div class="mb-4">
@@ -69,7 +79,7 @@ $ips = $total_bobot / $total_sks;
                 </tr>
                 <tr>
                     <td style="padding: 8px 0; font-weight: 600; color: #374151;">Konsentrasi</td>
-                    <td style="padding: 8px 0; color: #6b7280;">: [1] MULTIMEDIA</td>
+                    <td style="padding: 8px 0; color: #6b7280;">: <?= $mahasiswa['konsentrasi'] ?></td>
                 </tr>
             </table>
         </div>
@@ -147,28 +157,14 @@ $ips = $total_bobot / $total_sks;
                     <th style="padding: 12px 8px; width: 80px; font-weight: 700; color: #374151;">Kode MK</th>
                     <th style="padding: 12px 8px; font-weight: 700; color: #374151;">Nama Mata Kuliah</th>
                     <th style="padding: 12px 8px; font-weight: 700; color: #374151;">Dosen</th>
+                    <th style="padding: 12px 8px; width: 60px; font-weight: 700; color: #374151; text-align: center;">Hari</th>
+                    <th style="padding: 12px 8px; width: 80px; font-weight: 700; color: #374151; text-align: center;">Jam</th>
+                    <th style="padding: 12px 8px; width: 100px; font-weight: 700; color: #374151; text-align: center;">Konsentrasi</th>
                     <th style="padding: 12px 8px; width: 50px; font-weight: 700; color: #374151; text-align: center;">SKS</th>
-                    <th style="padding: 12px 8px; width: 40px; font-weight: 700; color: #374151; text-align: center;">T</th>
-                    <th style="padding: 12px 8px; width: 40px; font-weight: 700; color: #374151; text-align: center;">P</th>
-                    <th style="padding: 12px 8px; width: 60px; font-weight: 700; color: #374151; text-align: center;">Nilai</th>
-                    <th style="padding: 12px 8px; width: 70px; font-weight: 700; color: #374151; text-align: center;">Bobot</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($matakuliah as $index => $mk): 
-                    $bgColor = '';
-                    $textColor = '#374151';
-                    if($mk['nilai'] == 'A') {
-                        $bgColor = '#dcfce7';
-                        $textColor = '#166534';
-                    } elseif($mk['nilai'] == 'A-') {
-                        $bgColor = '#dbeafe';
-                        $textColor = '#1e40af';
-                    } elseif($mk['nilai'] == 'B+') {
-                        $bgColor = '#fef3c7';
-                        $textColor = '#92400e';
-                    }
-                ?>
+                <?php foreach($matakuliah as $index => $mk): ?>
                 <tr style="border-bottom: 1px solid #e5e7eb;">
                     <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #6b7280;">
                         <?= $index + 1 ?>
@@ -183,62 +179,26 @@ $ips = $total_bobot / $total_sks;
                         <?= $mk['dosen'] ?>
                     </td>
                     <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #374151;">
-                        <?= $mk['sks'] ?>
+                        <?= $mk['hari'] ?>
                     </td>
                     <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #374151;">
-                        <?= $mk['t'] ?>
+                        <?= $mk['jam'] ?>
                     </td>
                     <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #374151;">
-                        <?= $mk['p'] ?>
+                        <?= $mk['ruangan'] ?>
                     </td>
-                    <td style="padding: 12px 8px; text-align: center;">
-                        <span style="background: <?= $bgColor ?>; color: <?= $textColor ?>; padding: 4px 8px; border-radius: 4px; font-weight: 700; font-size: 12px;">
-                            <?= $mk['nilai'] ?>
+                    <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #374151;">
+                        <span style="background: <?= getKonsentrasiColor($mk['konsentrasi']) ?>; color: white; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: 700;">
+                            <?= $mk['konsentrasi'] ?>
                         </span>
                     </td>
                     <td style="padding: 12px 8px; text-align: center; font-weight: 600; color: #374151;">
-                        <?= number_format($mk['bobot'], 2) ?>
+                        <?= $mk['sks'] ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
-                
-                <!-- Total Row -->
-                <tr style="background: #f8f9fa; border-top: 2px solid #dee2e6;">
-                    <td colspan="4" style="padding: 16px 8px; text-align: right; font-weight: 700; color: #1e3a5f;">
-                        <strong>TOTAL:</strong>
-                    </td>
-                    <td style="padding: 16px 8px; text-align: center; font-weight: 700; color: #667eea; font-size: 16px;">
-                        <?= $total_sks ?>
-                    </td>
-                    <td colspan="3" style="padding: 16px 8px; text-align: right; font-weight: 700; color: #1e3a5f;">
-                        <strong>IPS:</strong>
-                    </td>
-                    <td style="padding: 16px 8px; text-align: center; font-weight: 700; color: #667eea; font-size: 16px;">
-                        <?= number_format($ips, 2) ?>
-                    </td>
-                </tr>
             </tbody>
         </table>
-    </div>
-</div>
-
-<!-- Info Status -->
-<div class="content-box mt-4" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);">
-    <div class="row align-items-center">
-        <div class="col-md-8">
-            <h6 style="font-weight: 700; color: #166534; margin-bottom: 8px;">
-                <i class="bi bi-check-circle-fill"></i> Status KRS
-            </h6>
-            <p style="color: #166534; margin: 0; font-size: 14px;">
-                KRS telah disetujui oleh Dosen Pembimbing Akademik pada tanggal 15 Agustus 2025
-            </p>
-        </div>
-        <div class="col-md-4 text-end">
-            <div style="background: rgba(22,101,52,0.1); padding: 12px; border-radius: 8px; border: 1px solid #bbf7d0;">
-                <div style="font-size: 12px; color: #166534; opacity: 0.8;">Total SKS Semester</div>
-                <div style="font-weight: 700; color: #166534; font-size: 18px;"><?= $total_sks ?> SKS</div>
-            </div>
-        </div>
     </div>
 </div>
 

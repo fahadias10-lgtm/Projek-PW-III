@@ -100,10 +100,11 @@ class Dashboard extends BaseController
         $semester = $this->request->getPost('semester');
         $program_studi = $this->request->getPost('program_studi');
         $semester_angka = $this->request->getPost('semester_angka');
+        $konsentrasi = $this->request->getPost('konsentrasi');
         $mata_kuliah = $this->request->getPost('mata_kuliah') ?? [];
         
         // Validasi data
-        if (empty($semester) || empty($semester_angka) || empty($mata_kuliah)) {
+        if (empty($semester) || empty($semester_angka) || empty($konsentrasi) || empty($mata_kuliah)) {
             $session->setFlashdata('error', 'Semua field harus diisi dan minimal pilih 1 mata kuliah!');
             return redirect()->to('/krs');
         }
@@ -151,6 +152,7 @@ class Dashboard extends BaseController
             'tahun' => $tahun_akademik,
             'semester' => $semester,
             'program_studi' => $program_studi,
+            'konsentrasi' => $konsentrasi,
             'semester_angka' => $semester_angka,
             'jumlah_mk' => count($mata_kuliah_dipilih),
             'total_sks' => $total_sks,
@@ -233,13 +235,13 @@ class Dashboard extends BaseController
         return view('pembayaran', $data);
     }
 
-    public function materi()
+    public function pilihMataKuliah()
     {
         $data = [
-            'title' => 'Unduhan Materi - Sistem Akademik',
+            'title' => 'Pilih Mata Kuliah - Sistem Akademik',
             'sidebar' => true,
         ];
-        return view('materi', $data);
+        return view('pilih_mk', $data);
     }
     
     public function tentang()

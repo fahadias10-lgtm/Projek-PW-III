@@ -27,6 +27,7 @@ $routes->get('/tentang', 'Dashboard::tentang');
 $routes->get('/krs', 'Dashboard::krs');
 $routes->post('/krs/simpan', 'Dashboard::simpanKrs');
 $routes->get('/krs-detail/(:segment)/(:segment)', 'Dashboard::krsDetail/$1/$2');
+$routes->get('/pilih-mata-kuliah', 'Dashboard::pilihMataKuliah');
 $routes->get('/khs', 'Dashboard::khs');
 $routes->get('/jadwal', 'Dashboard::jadwal');
 $routes->get('/transkrip', 'Dashboard::transkrip');
