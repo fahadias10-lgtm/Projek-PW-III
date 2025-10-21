@@ -39,3 +39,13 @@ $routes->get('/spada', 'Spada::index');
 $routes->get('/spada/perkuliahan', 'Spada::perkuliahan');
 $routes->get('/spada/arsip', 'Spada::arsip');
 $routes->get('/spada/panduan', 'Spada::panduan');
+
+// Routes untuk Dosen
+$routes->get('/dosen/dashboard', 'DosenController::dashboard');
+$routes->get('/dosen/persetujuan-krs', 'DosenController::persetujuanKrs');
+$routes->get('/dosen/mahasiswa-perwalian', 'DosenController::mahasiswaPerwalian');
+$routes->get('/dosen/input-nilai', 'DosenController::inputNilai');
+$routes->get('/dosen/jadwal-mengajar', 'DosenController::jadwalMengajar');
+$routes->post('/dosen/setujui-krs', 'DosenController::setujuiKrs');
+$routes->post('/dosen/tolak-krs', 'DosenController::tolakKrs');
+$routes->post('/dosen/simpan-nilai', 'DosenController::simpanNilai');
