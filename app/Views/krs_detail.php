@@ -53,9 +53,18 @@ function getKonsentrasiColor($konsentrasi) {
             <a href="/krs" class="btn btn-outline-primary me-2">
                 <i class="bi bi-arrow-left"></i> Kembali
             </a>
-            <button class="btn btn-primary">
-                <i class="bi bi-printer"></i> Print KRS
-            </button>
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary me-2">
+                    <i class="bi bi-printer"></i> Print KRS
+                </button>
+                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-printer"></i> Cetak Kartu
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="printKartu('UTS')"><i class="bi bi-card-checklist me-2"></i>Kartu UTS</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="printKartu('UAS')"><i class="bi bi-card-checklist me-2"></i>Kartu UAS</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -201,5 +210,178 @@ function getKonsentrasiColor($konsentrasi) {
         </table>
     </div>
 </div>
+
+<!-- Modal Konfirmasi Cetak -->
+<div class="modal fade" id="printConfirmationModal" tabindex="-1" aria-labelledby="printConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="printConfirmationModalLabel">Konfirmasi Cetak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mencetak <span id="jenisKartu"></span>?</p>
+                <p class="text-muted">Pastikan printer sudah terhubung dan siap digunakan.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="confirmPrint">Ya, Cetak</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentPrintType = '';
+    
+    function printKartu(type) {
+        currentPrintType = type;
+        document.getElementById('jenisKartu').textContent = 'Kartu ' + type;
+        const modal = new bootstrap.Modal(document.getElementById('printConfirmationModal'));
+        modal.show();
+    }
+    
+    document.getElementById('confirmPrint').addEventListener('click', function() {
+        // Simulasi proses cetak
+        const printWindow = window.open('', '_blank');
+        
+        // Konten yang akan dicetak
+        const printContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Kartu ${currentPrintType} - ${'<?= $mahasiswa["nama"] ?>'}</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+                <style>
+                    @page { size: A4; margin: 1cm; }
+                    body { font-family: Arial, sans-serif; }
+                    .card { border: 2px solid #000; padding: 20px; margin-bottom: 20px; }
+                    .header { text-align: center; margin-bottom: 20px; }
+                    .header h3 { font-weight: bold; margin: 0; }
+                    .header p { margin: 5px 0; }
+                    .table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+                    .table th, .table td { border: 1px solid #000; padding: 8px; }
+                    .text-center { text-align: center; }
+                    .text-right { text-align: right; }
+                    .mt-4 { margin-top: 1.5rem; }
+                    .mb-4 { margin-bottom: 1.5rem; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="card">
+                        <div class="header">
+                            <h3>KARTU PESERTA UJIAN ${currentPrintType}</h3>
+                            <p>UNIVERSITAS TEKNOLOGI DIGITAL INDONESIA</p>
+                            <p>TAHUN AKADEMIK ${'<?= $mahasiswa["tahun_akademik"] ?>'} - SEMESTER ${'<?= $mahasiswa["semester"] ?>'}</p>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tr>
+                                        <td width="40%">NIM</td>
+                                        <td width="5%">:</td>
+                                        <td>${'<?= $mahasiswa["nim"] ?>'}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nama</td>
+                                        <td>:</td>
+                                        <td>${'<?= $mahasiswa["nama"] ?>'}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Program Studi</td>
+                                        <td>:</td>
+                                        <td>${'<?= $mahasiswa["program_studi_lengkap"] ?>'}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <div style="border: 1px solid #000; width: 150px; height: 180px; float: right; text-align: center; padding: 5px;">
+                                    <div style="background: #f0f0f0; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                        <span>Pas Foto<br>3x4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h5 class="text-center mb-3">DAFTAR MATA KULIAH</h5>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%">No</th>
+                                    <th>Kode MK</th>
+                                    <th>Mata Kuliah</th>
+                                    <th>Kelas</th>
+                                    <th>Dosen</th>
+                                    <th>Hari/Jam</th>
+                                    <th>Ruang</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${'<?php foreach($matakuliah as $index => $mk): ?>'}
+                                <tr>
+                                    <td class="text-center">${'<?= $index + 1 ?>'}</td>
+                                    <td>${'<?= $mk["kode"] ?>'}</td>
+                                    <td>${'<?= $mk["nama"] ?>'}</td>
+                                    <td class="text-center">A</td>
+                                    <td>${'<?= $mk["dosen"] ?>'}</td>
+                                    <td>${'<?= $mk["hari"] ?>, ' + '<?= $mk["jam"] ?>'}</td>
+                                    <td>${'<?= $mk["ruangan"] ?>'}</td>
+                                </tr>
+                                ${'<?php endforeach; ?>'}
+                            </tbody>
+                        </table>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <p>Total SKS: <strong>${'<?= $total_sks ?>'} SKS</strong></p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p>Yogyakarta, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                <div style="margin-top: 50px;">
+                                    <p>${'<?= $mahasiswa["nama"] ?>'}</p>
+                                    <p>NIM. ${'<?= $mahasiswa["nim"] ?>'}</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4" style="font-size: 12px; text-align: center;">
+                            <p><strong>CATATAN PENTING:</strong></p>
+                            <ol style="text-align: left; padding-left: 20px; margin: 10px 0;">
+                                <li>Kartu ini wajib dibawa saat ujian</li>
+                                <li>Tunjukkan kartu ini kepada pengawas ujian</li>
+                                <li>Dilarang meminjamkan kartu ini kepada siapapun</li>
+                                <li>Jika kartu ini hilang, segera hubungi bagian akademik</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+        
+        printWindow.document.open();
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        
+        // Auto print after content loads
+        printWindow.onload = function() {
+            setTimeout(function() {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        };
+        
+        // Close the modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('printConfirmationModal'));
+        modal.hide();
+        
+        // Show success message
+        alert(`Kartu ${currentPrintType} berhasil dicetak!`);
+    });
+</script>
 
 <?php $this->endSection(); ?>
