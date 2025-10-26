@@ -15,9 +15,14 @@
         </div>
         <p>Spada merupakan sistem yang dibangun untuk membantu dalam proses pembelajaran secara daring.</p>
         <p>Proses belajar mengajar atau perkuliahan antara dosen dan mahasiswa dapat dilakukan secara Online</p>
-        <a href="/spada/perkuliahan" class="btn btn-warning btn-lg">
-            <i class="bi bi-book"></i> Mulai Perkuliahan
-        </a>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="/spada/perkuliahan" class="btn btn-warning btn-lg">
+                <i class="bi bi-play-circle"></i> Mulai Perkuliahan
+            </a>
+            <a href="/spada/panduan" class="btn btn-lg" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
+                <i class="bi bi-book"></i> Lihat Panduan
+            </a>
+        </div>
     </div>
 </div>
 
@@ -124,22 +129,6 @@
                     <p style="color: #6b7280; font-size: 14px;">Sistem presensi otomatis untuk setiap sesi perkuliahan</p>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- CTA Section -->
-<div class="container mb-5">
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 60px 40px; text-align: center; color: white; box-shadow: 0 12px 40px rgba(102,126,234,0.4);">
-        <h3 style="font-weight: 800; margin-bottom: 16px; font-size: 32px;">Siap Memulai Pembelajaran?</h3>
-        <p style="font-size: 18px; opacity: 0.95; margin-bottom: 32px;">Akses semua mata kuliah dan materi pembelajaran Anda</p>
-        <div class="d-flex gap-3 justify-content-center flex-wrap">
-            <a href="/spada/perkuliahan" class="btn btn-warning btn-lg">
-                <i class="bi bi-play-circle"></i> Mulai Belajar
-            </a>
-            <a href="/spada/panduan" class="btn btn-lg" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white;">
-                <i class="bi bi-book"></i> Lihat Panduan
-            </a>
         </div>
     </div>
 </div>

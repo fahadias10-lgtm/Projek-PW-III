@@ -37,6 +37,7 @@ $routes->get('/materi', 'Dashboard::materi');
 // Routes untuk SPADA
 $routes->get('/spada', 'Spada::index');
 $routes->get('/spada/perkuliahan', 'Spada::perkuliahan');
+$routes->get('/spada/detail/(:segment)', 'Spada::detailMatkul/$1');
 $routes->get('/spada/arsip', 'Spada::arsip');
 $routes->get('/spada/panduan', 'Spada::panduan');
 

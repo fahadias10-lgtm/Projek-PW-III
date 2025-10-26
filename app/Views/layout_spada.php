@@ -92,6 +92,11 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
         }
         .hero-section h1 { 
             font-size: 48px; 

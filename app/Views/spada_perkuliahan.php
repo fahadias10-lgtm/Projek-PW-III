@@ -23,7 +23,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / -</p>
                 <p><strong>Waktu:</strong> SENIN - 08.00 s/d 11.15</p>
                 <p><strong>Dosen:</strong> Matias Bagus M.Kom</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/1" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / PEMROGRAMAN</p>
                 <p><strong>Waktu:</strong> SELASA - 08.00 s/d 11.15</p>
                 <p><strong>Dosen:</strong> ZAINUL - H.M.Kom M.M</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/2" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / PEMROGRAMAN</p>
                 <p><strong>Waktu:</strong> SELASA - 08.00 s/d 14.45</p>
                 <p><strong>Dosen:</strong> Matias Bagus M.Kom</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/3" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / -</p>
                 <p><strong>Waktu:</strong> SABTU - 08.00 s/d 12.00</p>
                 <p><strong>Dosen:</strong> TRNA</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/4" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
 
@@ -73,7 +73,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / PEMROGRAMAN</p>
                 <p><strong>Waktu:</strong> KAMIS - 14.15 s/d 16.45</p>
                 <p><strong>Dosen:</strong> Zainul - H.M.Kom Endang Ripan M.Kom</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/5" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / PEMROGRAMAN</p>
                 <p><strong>Waktu:</strong> KAMIS - 08.00 s/d 10.30</p>
                 <p><strong>Dosen:</strong> Anggietas M.Kom</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/6" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / -</p>
                 <p><strong>Waktu:</strong> RABU - 08.10 s/d 11.25</p>
                 <p><strong>Dosen:</strong> Dosen Bahagia H.Pd (Nama Lengkap) M.Pd</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/7" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
 
@@ -111,7 +111,7 @@
                 <p><strong>Semester:</strong> 5 / R1 / A1 / PEMROGRAMAN</p>
                 <p><strong>Waktu:</strong> JUMAT - 8.10 s/d 10.15</p>
                 <p><strong>Dosen:</strong> Anggietas M.Kom Agung Prasetyo M.Kom</p>
-                <a href="#" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
+                <a href="/spada/detail/8" class="btn btn-masuk btn-sm mt-2">Masuk Kelas</a>
             </div>
         </div>
     </div>
