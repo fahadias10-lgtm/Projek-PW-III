@@ -1,0 +1,7 @@
+/vendor/
+/writable/
+/.env
+composer.phar
+composer.lock
+*.log
+.DS_Store
